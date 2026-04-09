@@ -13,29 +13,29 @@
           <span></span>
         </div>
 
-        <button class="scene-switcher">
+        <button class="scene-switcher" type="button" data-feedback="已切换到默认创作工作流。场景切换面板会在后续版本补齐。">
           默认创作
           <span class="caret"></span>
         </button>
 
         <nav class="side-nav">
-          <a class="nav-item" href="#">
+          <a class="nav-item" href="#feed" data-nav="灵感">
             <span class="nav-icon">⌂</span>
             <span>灵感</span>
           </a>
-          <a class="nav-item active" href="#">
+          <a class="nav-item active" href="#feed" data-nav="生成">
             <span class="nav-icon">✦</span>
             <span>生成</span>
           </a>
-          <a class="nav-item" href="#">
+          <a class="nav-item" href="#feed" data-nav="资产">
             <span class="nav-icon">▣</span>
             <span>资产</span>
           </a>
-          <a class="nav-item" href="#">
+          <a class="nav-item" href="#feed" data-nav="画布">
             <span class="nav-icon">⊞</span>
             <span>画布</span>
           </a>
-          <a class="nav-item nav-item-beta" href="#">
+          <a class="nav-item nav-item-beta" href="#feed" data-feedback="Octo 仍在 Beta 阶段，当前原型暂不开放完整能力。">
             <span class="nav-icon nav-octo">◉</span>
             <span>Octo</span>
             <em>Beta</em>
@@ -58,16 +58,68 @@
 
       <main class="workspace">
         <header class="topbar">
-          <div class="search-pill">
-            <span class="search-icon"></span>
-            <button>时间 <span class="caret"></span></button>
-            <button>生成类型 <span class="caret"></span></button>
-            <button>操作类型 <span class="caret"></span></button>
+          <div class="topbar-spacer" aria-hidden="true"></div>
+
+          <div class="search-toolbar" aria-label="搜索与筛选工具栏">
+            <div class="search-shell" id="searchShell">
+              <button class="search-toggle" id="searchToggle" type="button" aria-expanded="false" aria-label="展开搜索">
+                <span class="search-icon"></span>
+              </button>
+              <input
+                class="search-input"
+                id="searchInput"
+                type="text"
+                placeholder="搜索 prompt、模型或作品标题"
+                aria-label="搜索作品"
+              />
+            </div>
+
+            <div class="filter-toolbar-actions">
+              <div class="filter-dropdown">
+                <button type="button" class="filter-trigger" data-filter-key="time" aria-expanded="false">
+                  时间<span class="filter-value" data-filter-label="time"></span> <span class="caret"></span>
+                </button>
+                <div class="filter-menu" hidden>
+                  <button type="button" data-filter-option="time" data-value="最近">最近</button>
+                  <button type="button" data-filter-option="time" data-value="最近7天">最近7天</button>
+                  <button type="button" data-filter-option="time" data-value="最近30天">最近30天</button>
+                </div>
+              </div>
+
+              <div class="filter-dropdown">
+                <button type="button" class="filter-trigger" data-filter-key="type" aria-expanded="false">
+                  生成类型<span class="filter-value" data-filter-label="type"></span> <span class="caret"></span>
+                </button>
+                <div class="filter-menu" hidden>
+                  <button type="button" data-filter-option="type" data-value="图片">图片</button>
+                  <button type="button" data-filter-option="type" data-value="视频">视频</button>
+                  <button type="button" data-filter-option="type" data-value="全部">全部</button>
+                </div>
+              </div>
+
+              <div class="filter-dropdown">
+                <button type="button" class="filter-trigger" data-filter-key="action" aria-expanded="false">
+                  操作类型<span class="filter-value" data-filter-label="action"></span> <span class="caret"></span>
+                </button>
+                <div class="filter-menu" hidden>
+                  <button type="button" data-filter-option="action" data-value="全部操作">全部操作</button>
+                  <button type="button" data-filter-option="action" data-value="首次生成">首次生成</button>
+                  <button type="button" data-filter-option="action" data-value="再次生成">再次生成</button>
+                  <button type="button" data-filter-option="action" data-value="编辑后生成">编辑后生成</button>
+                </div>
+              </div>
+            </div>
           </div>
         </header>
 
-        <section class="feed">
-          <article class="post-card featured">
+        <section class="feed" id="feed">
+          <article
+            class="post-card featured post-card-generating"
+            data-title="赛博战士在能量风暴中蓄力，电弧缠绕，电影级光影，动态冲击构图"
+            data-model="Seedance 1.5 Pro"
+            data-meta="5s ｜ 1024×1536 ｜ 电影级构图"
+            data-status="生成中 · 第 3/4 帧正在细化电弧与能量球细节"
+          >
             <div class="prompt-row">
               <div class="quote-badge">“</div>
               <div class="prompt-thumbs">
@@ -76,25 +128,63 @@
               </div>
               <div class="prompt-copy">
                 <h2>赛博战士在能量风暴中蓄力，电弧缠绕，电影级光影，动态冲击构图</h2>
-                <p>Seedance 1.5 Pro ｜ 5s ｜ 详细信息</p>
+                <p>
+                  <span>Seedance 1.5 Pro ｜ 生成中 68%</span>
+                  <button class="text-link" type="button" data-open-detail>详细信息</button>
+                </p>
               </div>
             </div>
 
-            <div class="art-frame">
-              <div class="art-work art-work-hero">
-                <div class="art-tag">AI生成</div>
+            <button class="art-frame art-frame-button" type="button" data-open-detail aria-label="查看作品详情">
+              <div class="art-work art-work-hero art-work-generating">
+                <div class="art-tag art-tag-generating">生成中</div>
                 <div class="energy-core"></div>
+                <div class="generation-orb"></div>
+                <div class="generation-particles">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="generation-scan"></div>
+                <div class="generation-status">
+                  <span class="generation-dot"></span>
+                  正在渲染高光与粒子层
+                </div>
+                <div class="generation-progress">
+                  <div class="generation-progress-bar"></div>
+                </div>
               </div>
-            </div>
+            </button>
 
             <div class="action-row">
-              <button class="soft-btn">▢ 重新编辑</button>
-              <button class="soft-btn">↻ 再次生成</button>
-              <button class="icon-btn">•••</button>
+              <button class="soft-btn action-btn action-btn-edit" type="button" data-action="edit">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>重新编辑</span>
+              </button>
+              <button class="soft-btn action-btn action-btn-rerun" type="button" data-action="rerun">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>再次生成</span>
+              </button>
+              <div class="menu-wrap">
+                <button class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false" data-menu-trigger>•••</button>
+                <div class="context-menu" hidden>
+                  <button type="button" data-feedback="已复制这张作品的分享链接。">复制链接</button>
+                  <button type="button" data-feedback="已加入对比面板，后续版本会支持并排比较。">加入对比</button>
+                  <button type="button" data-feedback="已标记为收藏，收藏列表会在资产区展示。">收藏作品</button>
+                </div>
+              </div>
             </div>
           </article>
 
-          <article class="post-card">
+          <article
+            class="post-card"
+            data-title="机甲少女与浮空晶体对峙，烟尘粒子漂浮，紫白能量球在掌心旋转"
+            data-model="Seedance 2.0"
+            data-meta="高精模式 ｜ 4s ｜ 896×1344"
+            data-status="生成完成 · 支持继续编辑"
+          >
             <div class="prompt-row">
               <div class="quote-badge">“</div>
               <div class="prompt-thumbs">
@@ -103,21 +193,184 @@
               </div>
               <div class="prompt-copy">
                 <h2>机甲少女与浮空晶体对峙，烟尘粒子漂浮，紫白能量球在掌心旋转</h2>
-                <p>Seedance 2.0 ｜ 高精模式 ｜ 详细信息</p>
+                <p>
+                  <span>Seedance 2.0 ｜ 高精模式</span>
+                  <button class="text-link" type="button" data-open-detail>详细信息</button>
+                </p>
               </div>
             </div>
 
-            <div class="art-frame">
+            <button class="art-frame art-frame-button" type="button" data-open-detail aria-label="查看作品详情">
               <div class="art-work art-work-alt">
                 <div class="art-tag">AI生成</div>
                 <div class="energy-core"></div>
               </div>
-            </div>
+            </button>
 
             <div class="action-row">
-              <button class="soft-btn">▢ 重新编辑</button>
-              <button class="soft-btn">↻ 再次生成</button>
-              <button class="icon-btn">•••</button>
+              <button class="soft-btn action-btn action-btn-edit" type="button" data-action="edit">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>重新编辑</span>
+              </button>
+              <button class="soft-btn action-btn action-btn-rerun" type="button" data-action="rerun">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>再次生成</span>
+              </button>
+              <div class="menu-wrap">
+                <button class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false" data-menu-trigger>•••</button>
+                <div class="context-menu" hidden>
+                  <button type="button" data-feedback="已复制这张作品的分享链接。">复制链接</button>
+                  <button type="button" data-feedback="已加入对比面板，后续版本会支持并排比较。">加入对比</button>
+                  <button type="button" data-feedback="已标记为收藏，收藏列表会在资产区展示。">收藏作品</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="post-card"
+            data-title="未来城市高架桥下的银色跑车，雨夜反射霓虹，低机位电影感追焦"
+            data-model="Seedance 2.0 Turbo"
+            data-meta="写实模式 ｜ 3s ｜ 1280×720"
+            data-status="生成完成 · 可继续修改镜头参数"
+          >
+            <div class="prompt-row">
+              <div class="quote-badge">“</div>
+              <div class="prompt-thumbs">
+                <div class="thumb thumb-a"></div>
+                <div class="thumb thumb-d"></div>
+              </div>
+              <div class="prompt-copy">
+                <h2>未来城市高架桥下的银色跑车，雨夜反射霓虹，低机位电影感追焦</h2>
+                <p>
+                  <span>Seedance 2.0 Turbo ｜ 写实模式</span>
+                  <button class="text-link" type="button" data-open-detail>详细信息</button>
+                </p>
+              </div>
+            </div>
+
+            <button class="art-frame art-frame-button" type="button" data-open-detail aria-label="查看作品详情">
+              <div class="art-work art-work-hero">
+                <div class="art-tag">AI生成</div>
+                <div class="energy-core"></div>
+              </div>
+            </button>
+
+            <div class="action-row">
+              <button class="soft-btn action-btn action-btn-edit" type="button" data-action="edit">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>重新编辑</span>
+              </button>
+              <button class="soft-btn action-btn action-btn-rerun" type="button" data-action="rerun">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>再次生成</span>
+              </button>
+              <div class="menu-wrap">
+                <button class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false" data-menu-trigger>•••</button>
+                <div class="context-menu" hidden>
+                  <button type="button" data-feedback="已复制这张作品的分享链接。">复制链接</button>
+                  <button type="button" data-feedback="已加入对比面板，后续版本会支持并排比较。">加入对比</button>
+                  <button type="button" data-feedback="已标记为收藏，收藏列表会在资产区展示。">收藏作品</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="post-card"
+            data-title="云层上方漂浮花园，白色建筑与玻璃穹顶交织，晨光穿透薄雾"
+            data-model="Seedance 1.9 Pro"
+            data-meta="概念设计 ｜ 6s ｜ 1536×1024"
+            data-status="生成完成 · 已生成 4 个变体"
+          >
+            <div class="prompt-row">
+              <div class="quote-badge">“</div>
+              <div class="prompt-thumbs">
+                <div class="thumb thumb-c"></div>
+                <div class="thumb thumb-b"></div>
+              </div>
+              <div class="prompt-copy">
+                <h2>云层上方漂浮花园，白色建筑与玻璃穹顶交织，晨光穿透薄雾</h2>
+                <p>
+                  <span>Seedance 1.9 Pro ｜ 概念设计</span>
+                  <button class="text-link" type="button" data-open-detail>详细信息</button>
+                </p>
+              </div>
+            </div>
+
+            <button class="art-frame art-frame-button" type="button" data-open-detail aria-label="查看作品详情">
+              <div class="art-work art-work-alt">
+                <div class="art-tag">AI生成</div>
+                <div class="energy-core"></div>
+              </div>
+            </button>
+
+            <div class="action-row">
+              <button class="soft-btn action-btn action-btn-edit" type="button" data-action="edit">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>重新编辑</span>
+              </button>
+              <button class="soft-btn action-btn action-btn-rerun" type="button" data-action="rerun">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>再次生成</span>
+              </button>
+              <div class="menu-wrap">
+                <button class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false" data-menu-trigger>•••</button>
+                <div class="context-menu" hidden>
+                  <button type="button" data-feedback="已复制这张作品的分享链接。">复制链接</button>
+                  <button type="button" data-feedback="已加入对比面板，后续版本会支持并排比较。">加入对比</button>
+                  <button type="button" data-feedback="已标记为收藏，收藏列表会在资产区展示。">收藏作品</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="post-card"
+            data-title="古风庭院里撑伞的少女，青石地面倒映灯笼暖光，雨丝细密"
+            data-model="Seedance Portrait"
+            data-meta="人像优化 ｜ 5s ｜ 1024×1365"
+            data-status="生成完成 · 人像细节增强已开启"
+          >
+            <div class="prompt-row">
+              <div class="quote-badge">“</div>
+              <div class="prompt-thumbs">
+                <div class="thumb thumb-d"></div>
+                <div class="thumb thumb-a"></div>
+              </div>
+              <div class="prompt-copy">
+                <h2>古风庭院里撑伞的少女，青石地面倒映灯笼暖光，雨丝细密</h2>
+                <p>
+                  <span>Seedance Portrait ｜ 人像优化</span>
+                  <button class="text-link" type="button" data-open-detail>详细信息</button>
+                </p>
+              </div>
+            </div>
+
+            <button class="art-frame art-frame-button" type="button" data-open-detail aria-label="查看作品详情">
+              <div class="art-work art-work-hero">
+                <div class="art-tag">AI生成</div>
+                <div class="energy-core"></div>
+              </div>
+            </button>
+
+            <div class="action-row">
+              <button class="soft-btn action-btn action-btn-edit" type="button" data-action="edit">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>重新编辑</span>
+              </button>
+              <button class="soft-btn action-btn action-btn-rerun" type="button" data-action="rerun">
+                <span class="action-glyph" aria-hidden="true"></span>
+                <span>再次生成</span>
+              </button>
+              <div class="menu-wrap">
+                <button class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false" data-menu-trigger>•••</button>
+                <div class="context-menu" hidden>
+                  <button type="button" data-feedback="已复制这张作品的分享链接。">复制链接</button>
+                  <button type="button" data-feedback="已加入对比面板，后续版本会支持并排比较。">加入对比</button>
+                  <button type="button" data-feedback="已标记为收藏，收藏列表会在资产区展示。">收藏作品</button>
+                </div>
+              </div>
             </div>
           </article>
         </section>
@@ -125,15 +378,17 @@
         <section class="composer-shell" id="composer">
           <div class="composer-header">
             <div class="header-title">🪄 Seedance Agent 创作模式</div>
-            <a href="#">试一试</a>
+            <button class="text-link" type="button" id="tryComposer">试一试</button>
           </div>
 
           <div class="composer-compact-bar">
-            <button class="compact-upload" aria-label="上传参考">+</button>
+            <button class="compact-upload" type="button" aria-label="上传参考">+</button>
             <button class="compact-input" id="compactTrigger" type="button">
-              描述你想生成的画面，点击继续输入更完整提示词
+              继续输入提示词，展开后补充更完整描述
             </button>
-            <button class="launch-btn compact-launch">↑</button>
+            <button class="generate-btn compact-generate-btn" id="compactGenerateBtn" type="button" disabled aria-label="立即生成">
+              <span class="compact-arrow" aria-hidden="true">↑</span>
+            </button>
           </div>
 
           <div class="composer-body">
@@ -141,37 +396,143 @@
               <span>+</span>
             </div>
             <div class="composer-text">
-              <h3>Seedance 2.0 全能参考，上传参考，输入文字，创意无限可能</h3>
+              <h3>先输入提示词，再点击右侧主按钮开始生成。支持上传参考图补充画面方向。</h3>
               <textarea id="promptInput" placeholder="描述你想生成的画面，比如：晨雾中的白虎机甲站在废墟车站前，电影感逆光，细节锐利。"></textarea>
             </div>
           </div>
 
           <div class="composer-toolbar">
             <div class="toolbar-left">
-              <button class="tab active">Agent 模式 <span class="caret"></span></button>
-              <button class="tab">视频创作</button>
-              <button class="tab">自动</button>
-              <button class="tab">灵感搜索</button>
-              <button class="tab">创意设计</button>
+              <button class="tab active" type="button" data-feedback="已切换到 Agent 模式。">Agent 模式 <span class="caret"></span></button>
+              <button class="tab" type="button" data-feedback="视频创作还在联调中，当前原型先保留入口说明。">视频创作</button>
+              <button class="tab" type="button" data-feedback="自动模式将在后续版本支持批量参数组合。">自动</button>
+              <button class="tab" type="button" data-feedback="灵感搜索将在下一轮接入真实搜索结果。">灵感搜索</button>
+              <button class="tab" type="button" data-feedback="创意设计工作台正在整理中，暂未开放。">创意设计</button>
             </div>
-            <button class="launch-btn">↑</button>
+            <button class="generate-btn" id="generateBtn" type="button" disabled>
+              立即生成
+            </button>
           </div>
         </section>
+
       </main>
 
-      <button class="floating-translate" aria-label="翻译">A</button>
-      <button class="floating-help" aria-label="帮助">?</button>
+      <nav class="mobile-tabbar" aria-label="移动端主导航">
+        <button class="mobile-tab" type="button" data-nav="灵感">
+          <span class="mobile-tab-icon">⌂</span>
+          <span>灵感</span>
+        </button>
+        <button class="mobile-tab active" type="button" data-nav="生成">
+          <span class="mobile-tab-icon">✦</span>
+          <span>生成</span>
+        </button>
+        <button class="mobile-tab" type="button" data-nav="资产">
+          <span class="mobile-tab-icon">▣</span>
+          <span>资产</span>
+        </button>
+        <button class="mobile-tab" type="button" data-nav="画布">
+          <span class="mobile-tab-icon">⊞</span>
+          <span>画布</span>
+        </button>
+      </nav>
+
+      <button class="floating-help" type="button" aria-label="查看帮助" data-feedback="帮助中心将在后续版本补充常见问题与示例提示词。">?</button>
     </div>
+
+    <div class="detail-overlay" id="detailOverlay" hidden>
+      <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <div class="detail-header">
+          <div>
+            <p class="detail-eyebrow">作品详情</p>
+            <h3 id="detailTitle">作品标题</h3>
+          </div>
+          <button class="detail-close" type="button" id="detailClose" aria-label="关闭详情">×</button>
+        </div>
+        <dl class="detail-grid">
+          <div>
+            <dt>模型</dt>
+            <dd id="detailModel"></dd>
+          </div>
+          <div>
+            <dt>参数</dt>
+            <dd id="detailMeta"></dd>
+          </div>
+          <div class="detail-full">
+            <dt>状态</dt>
+            <dd id="detailStatus"></dd>
+          </div>
+        </dl>
+        <div class="detail-actions">
+          <button class="soft-btn" type="button" data-feedback="已复制作品参数，后续会支持一键复用。">复制参数</button>
+          <button class="soft-btn" type="button" data-feedback="对比视图将在下一轮作品卡优化中开放。">加入对比</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
     <script>
       const composer = document.getElementById("composer");
       const promptInput = document.getElementById("promptInput");
       const compactTrigger = document.getElementById("compactTrigger");
-      const compactThreshold = 140;
+      const tryComposer = document.getElementById("tryComposer");
+      const searchShell = document.getElementById("searchShell");
+      const searchToggle = document.getElementById("searchToggle");
+      const searchInput = document.getElementById("searchInput");
+      const generateBtn = document.getElementById("generateBtn");
+      const compactGenerateBtn = document.getElementById("compactGenerateBtn");
+      const detailOverlay = document.getElementById("detailOverlay");
+      const detailTitle = document.getElementById("detailTitle");
+      const detailModel = document.getElementById("detailModel");
+      const detailMeta = document.getElementById("detailMeta");
+      const detailStatus = document.getElementById("detailStatus");
+      const detailClose = document.getElementById("detailClose");
+      const toastRegion = document.getElementById("toastRegion");
+      const compactEnterThreshold = 240;
+      const compactExitThreshold = 96;
+      let toastTimer = null;
+      const filterState = {
+        time: "",
+        type: "",
+        action: "",
+      };
+
+      function hasValidPrompt() {
+        return promptInput.value.trim().length > 0;
+      }
+
+      function syncGenerateState() {
+        const ready = hasValidPrompt();
+        const isEmpty = promptInput.value.trim().length === 0;
+        generateBtn.disabled = !ready;
+        compactGenerateBtn.disabled = !ready;
+        composer.classList.toggle("is-ready", ready);
+        composer.classList.toggle("is-empty", isEmpty);
+        compactTrigger.textContent = ready
+          ? promptInput.value.trim()
+          : "继续输入提示词，补充主体、场景和风格细节";
+      }
 
       function updateComposerState() {
-        const shouldCompact = window.scrollY > compactThreshold && !composer.matches(".is-expanded");
-        composer.classList.toggle("is-compact", shouldCompact);
+        const currentScrollY = window.scrollY;
+        const hasComposerFocus = composer.contains(document.activeElement);
+
+        if (hasComposerFocus) {
+          composer.classList.add("is-expanded");
+          composer.classList.remove("is-compact");
+        } else if (currentScrollY <= compactExitThreshold) {
+          composer.classList.remove("is-expanded");
+          composer.classList.remove("is-compact");
+        } else if (composer.classList.contains("is-compact")) {
+          composer.classList.add("is-compact");
+          composer.classList.remove("is-expanded");
+        } else if (currentScrollY >= compactEnterThreshold) {
+          composer.classList.remove("is-expanded");
+          composer.classList.add("is-compact");
+        } else {
+          composer.classList.remove("is-expanded");
+          composer.classList.remove("is-compact");
+        }
       }
 
       function expandComposer(options = {}) {
@@ -193,6 +554,46 @@
         updateComposerState();
       }
 
+      function showToast(message) {
+        toastRegion.textContent = message;
+        toastRegion.classList.add("is-visible");
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => {
+          toastRegion.classList.remove("is-visible");
+        }, 2200);
+      }
+
+      function renderFilterState() {
+        document.querySelectorAll("[data-filter-label]").forEach((node) => {
+          const key = node.dataset.filterLabel;
+          node.textContent = filterState[key] ? `：${filterState[key]}` : "";
+        });
+      }
+
+      function openDetail(card) {
+        detailTitle.textContent = card.dataset.title;
+        detailModel.textContent = card.dataset.model;
+        detailMeta.textContent = card.dataset.meta;
+        detailStatus.textContent = card.dataset.status;
+        detailOverlay.hidden = false;
+        document.body.classList.add("is-modal-open");
+      }
+
+      function closeDetail() {
+        detailOverlay.hidden = true;
+        document.body.classList.remove("is-modal-open");
+      }
+
+      function handleGenerate() {
+        if (!hasValidPrompt()) {
+          showToast("先输入更完整的提示词，再开始生成。");
+          expandComposer({ instant: true });
+          promptInput.focus();
+          return;
+        }
+        showToast("已开始生成。当前原型先反馈动作，生成进度和结果刷新会在后续版本补齐。");
+      }
+
       window.addEventListener("scroll", updateComposerState, { passive: true });
 
       composer.addEventListener("focusin", expandComposer);
@@ -211,6 +612,170 @@
         promptInput.focus();
       });
 
+      tryComposer.addEventListener("click", () => {
+        expandComposer({ instant: true });
+        composer.scrollIntoView({ behavior: "smooth", block: "center" });
+        window.setTimeout(() => promptInput.focus(), 180);
+      });
+
+      searchToggle.addEventListener("click", () => {
+        const isOpen = searchShell.classList.toggle("is-open");
+        searchToggle.setAttribute("aria-expanded", String(isOpen));
+        if (isOpen) {
+          window.setTimeout(() => searchInput.focus(), 120);
+        } else {
+          searchInput.value = "";
+        }
+      });
+
+      searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          const keyword = searchInput.value.trim();
+          showToast(keyword ? `已搜索“${keyword}”，当前原型先反馈搜索动作。` : "请输入搜索关键词。");
+        }
+      });
+
+      promptInput.addEventListener("input", syncGenerateState);
+      generateBtn.addEventListener("click", handleGenerate);
+      compactGenerateBtn.addEventListener("click", handleGenerate);
+
+      document.querySelectorAll("[data-feedback]").forEach((element) => {
+        element.addEventListener("click", () => {
+          showToast(element.dataset.feedback);
+        });
+      });
+
+      document.querySelectorAll(".filter-trigger").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const menu = button.nextElementSibling;
+          const isOpen = !menu.hidden;
+          document.querySelectorAll(".filter-menu").forEach((node) => {
+            node.hidden = true;
+            node.previousElementSibling?.setAttribute("aria-expanded", "false");
+          });
+          menu.hidden = isOpen;
+          button.setAttribute("aria-expanded", String(!isOpen));
+        });
+      });
+
+      document.querySelectorAll("[data-filter-option]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const key = button.dataset.filterOption;
+          filterState[key] = button.dataset.value;
+          renderFilterState();
+          button.closest(".filter-menu").hidden = true;
+          button.closest(".filter-dropdown").querySelector(".filter-trigger").setAttribute("aria-expanded", "false");
+          const activeSummary = Object.values(filterState).filter(Boolean).join(" / ");
+          showToast(activeSummary ? `已按${activeSummary}筛选当前作品。` : "已清空筛选条件。");
+        });
+      });
+
+      function activateNav(navName) {
+        document.querySelectorAll("[data-nav]").forEach((node) => {
+          node.classList.toggle("active", node.dataset.nav === navName);
+        });
+      }
+
+      document.querySelectorAll("[data-nav]").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          if (item.matches("a")) {
+            event.preventDefault();
+          }
+          activateNav(item.dataset.nav);
+          document.getElementById("feed").scrollIntoView({ behavior: "smooth", block: "start" });
+          showToast(`已切换到${item.dataset.nav}视图，当前原型先聚焦生成链路。`);
+        });
+      });
+
+      document.querySelectorAll("[data-open-detail]").forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          openDetail(trigger.closest(".post-card"));
+        });
+      });
+
+      document.querySelectorAll("[data-action='edit']").forEach((button) => {
+        button.addEventListener("click", () => {
+          button.classList.remove("is-bursting");
+          void button.offsetWidth;
+          button.classList.add("is-bursting");
+          const card = button.closest(".post-card");
+          promptInput.value = card.dataset.title;
+          expandComposer({ instant: true });
+          composer.scrollIntoView({ behavior: "smooth", block: "center" });
+          window.setTimeout(() => promptInput.focus(), 180);
+          showToast("已将当前作品提示词带入创作区，你可以继续编辑后重新生成。");
+        });
+      });
+
+      document.querySelectorAll("[data-action='rerun']").forEach((button) => {
+        button.addEventListener("click", () => {
+          button.classList.remove("is-bursting");
+          void button.offsetWidth;
+          button.classList.add("is-bursting");
+          showToast("已加入再次生成队列。当前原型先展示反馈，生成进度将在后续版本补齐。");
+        });
+      });
+
+      document.querySelectorAll("[data-menu-trigger]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const menu = button.nextElementSibling;
+          const isOpen = !menu.hidden;
+          document.querySelectorAll(".context-menu").forEach((node) => {
+            node.hidden = true;
+            node.previousElementSibling?.setAttribute("aria-expanded", "false");
+          });
+          menu.hidden = isOpen;
+          button.setAttribute("aria-expanded", String(!isOpen));
+        });
+      });
+
+      document.querySelectorAll(".context-menu button").forEach((button) => {
+        button.addEventListener("click", () => {
+          button.closest(".context-menu").hidden = true;
+          button.closest(".menu-wrap").querySelector("[data-menu-trigger]").setAttribute("aria-expanded", "false");
+        });
+      });
+
+      detailClose.addEventListener("click", closeDetail);
+      detailOverlay.addEventListener("click", (event) => {
+        if (event.target === detailOverlay) {
+          closeDetail();
+        }
+      });
+
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".context-menu").forEach((node) => {
+          node.hidden = true;
+          node.previousElementSibling?.setAttribute("aria-expanded", "false");
+        });
+        document.querySelectorAll(".filter-menu").forEach((node) => {
+          node.hidden = true;
+          node.previousElementSibling?.setAttribute("aria-expanded", "false");
+        });
+        if (!searchShell.matches(":focus-within")) {
+          searchShell.classList.remove("is-open");
+          searchToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeDetail();
+          document.querySelectorAll(".context-menu").forEach((node) => {
+            node.hidden = true;
+            node.previousElementSibling?.setAttribute("aria-expanded", "false");
+          });
+          document.querySelectorAll(".filter-menu").forEach((node) => {
+            node.hidden = true;
+            node.previousElementSibling?.setAttribute("aria-expanded", "false");
+          });
+        }
+      });
+
+      syncGenerateState();
+      renderFilterState();
       updateComposerState();
     </script>
   </body>
