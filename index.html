@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>灵感画布 · AI 绘画工作台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-mark" aria-label="品牌标识">
+          <span></span>
+        </div>
+
+        <button class="scene-switcher">
+          默认创作
+          <span class="caret"></span>
+        </button>
+
+        <nav class="side-nav">
+          <a class="nav-item" href="#">
+            <span class="nav-icon">⌂</span>
+            <span>灵感</span>
+          </a>
+          <a class="nav-item active" href="#">
+            <span class="nav-icon">✦</span>
+            <span>生成</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="nav-icon">▣</span>
+            <span>资产</span>
+          </a>
+          <a class="nav-item" href="#">
+            <span class="nav-icon">⊞</span>
+            <span>画布</span>
+          </a>
+          <a class="nav-item nav-item-beta" href="#">
+            <span class="nav-icon nav-octo">◉</span>
+            <span>Octo</span>
+            <em>Beta</em>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="credit-card">
+            <strong>✦ 60</strong>
+            <span>开会员</span>
+          </div>
+          <div class="avatar-stack">
+            <div class="avatar"></div>
+            <div class="badge">2</div>
+          </div>
+          <button class="mini-link">API</button>
+          <button class="mini-link">一</button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="search-pill">
+            <span class="search-icon"></span>
+            <button>时间 <span class="caret"></span></button>
+            <button>生成类型 <span class="caret"></span></button>
+            <button>操作类型 <span class="caret"></span></button>
+          </div>
+        </header>
+
+        <section class="feed">
+          <article class="post-card featured">
+            <div class="prompt-row">
+              <div class="quote-badge">“</div>
+              <div class="prompt-thumbs">
+                <div class="thumb thumb-a"></div>
+                <div class="thumb thumb-b"></div>
+              </div>
+              <div class="prompt-copy">
+                <h2>赛博战士在能量风暴中蓄力，电弧缠绕，电影级光影，动态冲击构图</h2>
+                <p>Seedance 1.5 Pro ｜ 5s ｜ 详细信息</p>
+              </div>
+            </div>
+
+            <div class="art-frame">
+              <div class="art-work art-work-hero">
+                <div class="art-tag">AI生成</div>
+                <div class="energy-core"></div>
+              </div>
+            </div>
+
+            <div class="action-row">
+              <button class="soft-btn">▢ 重新编辑</button>
+              <button class="soft-btn">↻ 再次生成</button>
+              <button class="icon-btn">•••</button>
+            </div>
+          </article>
+
+          <article class="post-card">
+            <div class="prompt-row">
+              <div class="quote-badge">“</div>
+              <div class="prompt-thumbs">
+                <div class="thumb thumb-c"></div>
+                <div class="thumb thumb-d"></div>
+              </div>
+              <div class="prompt-copy">
+                <h2>机甲少女与浮空晶体对峙，烟尘粒子漂浮，紫白能量球在掌心旋转</h2>
+                <p>Seedance 2.0 ｜ 高精模式 ｜ 详细信息</p>
+              </div>
+            </div>
+
+            <div class="art-frame">
+              <div class="art-work art-work-alt">
+                <div class="art-tag">AI生成</div>
+                <div class="energy-core"></div>
+              </div>
+            </div>
+
+            <div class="action-row">
+              <button class="soft-btn">▢ 重新编辑</button>
+              <button class="soft-btn">↻ 再次生成</button>
+              <button class="icon-btn">•••</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="composer-shell" id="composer">
+          <div class="composer-header">
+            <div class="header-title">🪄 Seedance Agent 创作模式</div>
+            <a href="#">试一试</a>
+          </div>
+
+          <div class="composer-compact-bar">
+            <button class="compact-upload" aria-label="上传参考">+</button>
+            <button class="compact-input" id="compactTrigger" type="button">
+              描述你想生成的画面，点击继续输入更完整提示词
+            </button>
+            <button class="launch-btn compact-launch">↑</button>
+          </div>
+
+          <div class="composer-body">
+            <div class="upload-tile">
+              <span>+</span>
+            </div>
+            <div class="composer-text">
+              <h3>Seedance 2.0 全能参考，上传参考，输入文字，创意无限可能</h3>
+              <textarea id="promptInput" placeholder="描述你想生成的画面，比如：晨雾中的白虎机甲站在废墟车站前，电影感逆光，细节锐利。"></textarea>
+            </div>
+          </div>
+
+          <div class="composer-toolbar">
+            <div class="toolbar-left">
+              <button class="tab active">Agent 模式 <span class="caret"></span></button>
+              <button class="tab">视频创作</button>
+              <button class="tab">自动</button>
+              <button class="tab">灵感搜索</button>
+              <button class="tab">创意设计</button>
+            </div>
+            <button class="launch-btn">↑</button>
+          </div>
+        </section>
+      </main>
+
+      <button class="floating-translate" aria-label="翻译">A</button>
+      <button class="floating-help" aria-label="帮助">?</button>
+    </div>
+
+    <script>
+      const composer = document.getElementById("composer");
+      const promptInput = document.getElementById("promptInput");
+      const compactTrigger = document.getElementById("compactTrigger");
+      const compactThreshold = 140;
+
+      function updateComposerState() {
+        const shouldCompact = window.scrollY > compactThreshold && !composer.matches(".is-expanded");
+        composer.classList.toggle("is-compact", shouldCompact);
+      }
+
+      function expandComposer(options = {}) {
+        const { instant = false } = options;
+        if (instant) {
+          composer.classList.add("is-snapping");
+        }
+        composer.classList.add("is-expanded");
+        composer.classList.remove("is-compact");
+        if (instant) {
+          requestAnimationFrame(() => {
+            composer.classList.remove("is-snapping");
+          });
+        }
+      }
+
+      function releaseComposer() {
+        composer.classList.remove("is-expanded");
+        updateComposerState();
+      }
+
+      window.addEventListener("scroll", updateComposerState, { passive: true });
+
+      composer.addEventListener("focusin", expandComposer);
+
+      composer.addEventListener("focusout", () => {
+        requestAnimationFrame(() => {
+          if (!composer.contains(document.activeElement)) {
+            releaseComposer();
+          }
+        });
+      });
+
+      compactTrigger.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
+        expandComposer({ instant: true });
+        promptInput.focus();
+      });
+
+      updateComposerState();
+    </script>
+  </body>
+</html>
